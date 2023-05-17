@@ -9,9 +9,10 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class okhttpRegistrationTests {
+    //нужно когда мы строим запросы содержащие реквест body
     public static final MediaType JSON = MediaType.get("application/json;charset=utf-8");
-    Gson gson = new Gson();
-    OkHttpClient client = new OkHttpClient();
+    Gson gson = new Gson();//когда нам нужно обьект java превратить в Gson и наоборот
+    OkHttpClient client = new OkHttpClient();//отправляет запрос
 
     @Test
     public void registrationSuccess() throws IOException {

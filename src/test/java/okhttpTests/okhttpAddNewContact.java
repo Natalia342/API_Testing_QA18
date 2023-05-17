@@ -32,6 +32,7 @@ public class okhttpAddNewContact {
 
         Request request = new Request.Builder()
                 .url("https://contactapp-telran-backend.herokuapp.com/v1/contacts")
+                .addHeader("Authorization",token)
                 .build();
 
         Response response = client.newCall(request).execute();
