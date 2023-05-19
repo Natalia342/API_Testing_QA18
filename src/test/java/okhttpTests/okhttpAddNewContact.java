@@ -3,6 +3,7 @@ package okhttpTests;
 import com.google.gson.Gson;
 import dto.AuthResponseDTO;
 import dto.ContactDTO;
+import dto.ContactDTOResponse;
 import dto.ErrorDTO;
 import okhttp3.*;
 import org.testng.Assert;
@@ -33,11 +34,16 @@ public class okhttpAddNewContact {
         Request request = new Request.Builder()
                 .url("https://contactapp-telran-backend.herokuapp.com/v1/contacts")
                 .addHeader("Authorization",token)
+                .post (requestBody)//
                 .build();
 
         Response response = client.newCall(request).execute();
-
-
+        Assert.assertTrue(response.isSuccessful());
+        ContactDTOResponse  ContactDTOResponse = gson.fromJson(response.body().string(), dto.ContactDTOResponse.class);
+        String message = ContactDTOResponse.getMessage();
+        Assert.assertTrue(message.contains("Contact was added!"));
+        String id = message.substring(message.lastIndexOf(' ') + 1);
+        System.out.println(id);
     }
     }
 
